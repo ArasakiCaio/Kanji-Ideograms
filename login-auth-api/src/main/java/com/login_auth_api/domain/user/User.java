@@ -1,0 +1,25 @@
+package com.login_auth_api.domain.user;
+
+import jakarta.persistence.Entity;
+import jakarta.persistence.GenerationType;
+import jakarta.persistence.Id;
+import jakarta.persistence.Table;
+import lombok.AllArgsConstructor;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+import lombok.Setter;
+
+@Entity
+@Table(name = "users")
+@Getter
+@Setter
+@AllArgsConstructor
+@NoArgsConstructor
+public class User {
+    @Id
+    @GeneretedValue(strategy = GenerationType.UUID)
+    private String id;
+    private String username;
+    private String email;
+    private String password;
+}
