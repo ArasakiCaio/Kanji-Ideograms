@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="CopilotDiffPersistence">
+    <option name="pendingDiffs">
+      <map>
+        <entry key="$PROJECT_DIR$/login-auth-api/src/main/java/com/login_auth_api/repositories/UserRepository.java">
+          <value>
+            <PendingDiffInfo>
+              <option name="filePath" value="$PROJECT_DIR$/login-auth-api/src/main/java/com/login_auth_api/repositories/UserRepository.java" />
+              <option name="originalContent" value="package com.login_auth_api.repositories;&#10;&#10;import org.springframework.data.jpa.repository.JpaRepository;&#10;&#10;import java.util.Optional;&#10;&#10;public interface UserRepository extends JpaRepository&lt;User, String&gt; {&#10;    Optional&lt;User&gt; findByEmail(String email);&#10;}&#10;" />
+              <option name="updatedContent" value="package com.login_auth_api.repositories;&#10;&#10;import com.login_auth_api.domain.user.User;&#10;import org.springframework.data.jpa.repository.JpaRepository;&#10;&#10;import java.util.Optional;&#10;&#10;public interface UserRepository extends JpaRepository&lt;User, String&gt; {&#10;    Optional&lt;User&gt; findByEmail(String email);&#10;}" />
+            </PendingDiffInfo>
+          </value>
+        </entry>
+      </map>
+    </option>
+  </component>
+</project>
