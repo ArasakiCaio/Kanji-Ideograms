@@ -29,18 +29,6 @@ const Register = () => {
                 </div>
 
                 <div className="input-field">
-                    <FaLock className='icon' />
-                    <input type='password' placeholder='Senha'
-                    onChange={(e) => setPassword(e.target.value)} />
-                </div>
-
-                <div className="input-field">
-                    <FaLock className='icon' />
-                    <input type='password' placeholder='Repita a Senha'
-                    onChange={(e) => setRePassword(e.target.value)} />
-                </div>
-
-                <div className="input-field">
                     <FaMailBulk className='icon' />
                     <input type='email' placeholder='Email'
                     onChange={(e) => setEmail(e.target.value)} />
@@ -50,6 +38,18 @@ const Register = () => {
                     <FaMailBulk className='icon' />
                     <input type='email' placeholder='Repita o Email'
                     onChange={(e) => setReEmail(e.target.value)} />
+                </div>
+
+                <div className="input-field">
+                    <FaLock className='icon' />
+                    <input type='password' placeholder='Senha'
+                    onChange={(e) => setPassword(e.target.value)} />
+                </div>
+
+                <div className="input-field">
+                    <FaLock className='icon' />
+                    <input type='password' placeholder='Repita a Senha'
+                    onChange={(e) => setRePassword(e.target.value)} />
                 </div>
 
                 <div className="terms">
