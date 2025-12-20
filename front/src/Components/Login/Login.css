@@ -1,7 +1,7 @@
 .container {
     width: 450px;
-    background-color: darkcyan;
-    border: 2px solid darkcyan;
+    background-color: #FF0000;
+    border: 2px solid #FF0000;
     padding: 40px;
     border-radius: 10px;
 }
