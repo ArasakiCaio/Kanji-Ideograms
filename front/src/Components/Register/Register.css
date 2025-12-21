@@ -12,10 +12,6 @@
     color: white;
 }
 
-/*
-1. Tentar juntar as classes de input
-2. Diminuir o tamanho da fonte quando digita a senha
-*/
 .container .input-username,
 .container .input-email,
 .container .input-password {
