@@ -8,7 +8,7 @@ export function validatePasswords(password, rePassword) {
         return {valid: false, error: 'As senhas não são iguais'}
 
     if (!regex.test(password))
-        return {valid: false, error: 'A senha deve conter ao menos 8 caracteres, um caracter maíusculo, um caracter minúsculo e um caracter especial'}
+        return {valid: false, error: 'A senha deve conter ao menos 8 caracteres com ao menos um caracter maíusculo, um minúsculo e um especial'}
 
     return {valid: true, error: ''}
 }
@@ -29,12 +29,23 @@ export function validateEmails(email, reEmail) {
 }
 
 export function validateUsername(username) {
-    // 1. Regex para aceitar apenas alfanuméricos e espaço
+    const regex = /^[\w\s-]+$/
+
     if(!username)
         return {valid: false , error: ''}
 
     if(username.length < 4)
         return {valid: false, error: 'Username deve ter mais de 3 caracteres'}
 
+    if (!regex.test(username))
+        return {valid: false, error: 'O username deve conter apenas letras, números, espaços, - e _'}
+
     return {valid: true, error: ''}
+}
+
+export function validateTerms(acceptTerms) {
+    if(!acceptTerms)
+        return { valid: false, error: 'Você precisa aceitar os termos para se registrar'}
+
+    return { valid: true, error: '' }
 }

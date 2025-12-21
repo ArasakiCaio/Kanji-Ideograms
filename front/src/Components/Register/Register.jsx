@@ -1,9 +1,9 @@
-import { useEffect, useState } from 'react'
+import { use, useEffect, useState } from 'react'
 import { FaLock, FaMailBulk, FaUser } from 'react-icons/fa';
 import { Link } from 'react-router-dom'
 
 import './Register.css'
-import { validateEmails, validatePasswords, validateUsername } from '../../utils/validators';
+import { validateEmails, validatePasswords, validateTerms, validateUsername } from '../../utils/validators';
 
 const Register = () => {
     
@@ -12,10 +12,13 @@ const Register = () => {
     const [rePassword, setRePassword] = useState("");
     const [email, setEmail] = useState("");
     const [reEmail, setReEmail] = useState("");
+    const [showPassword, setShowPassword] = useState(false);
+    const [acceptTerms, setAcceptTerms] = useState(false);
 
     const [usernameError, setUsernameError] = useState("");
     const [passwordError, setPasswordError] = useState("");
     const [emailError, setEmailError] = useState("");
+    const [termsError, setTermsError] = useState("");
     const [canSubmit, setCanSubmit] = useState(false);
 
     useEffect(() => {
@@ -36,10 +39,12 @@ const Register = () => {
         const { valid: usernValid, error: usernError} = validateUsername(username)
         const { valid: passValid, error: passError} = validatePasswords(password, rePassword)
         const { valid: emailValid, error: emailError} = validateEmails(email, reEmail)
-        if(!usernValid || !passValid || !emailValid) {
+        const { valid: termsValid, error: terError} = validateTerms(acceptTerms)
+        if(!usernValid || !passValid || !emailValid || !termsValid ) {
             setUsernameError(usernError)
             setPasswordError(passError)
             setEmailError(emailError)
+            setTermsError(terError)
             return
         }
     };
@@ -90,9 +95,21 @@ const Register = () => {
                     onChange={(e) => setReEmail(e.target.value)} />
                 </div>
 
+                <div className="show-password">
+                    <input 
+                    id='show-password' 
+                    type='checkbox'
+                    checked={showPassword}
+                    onChange={(e) => setShowPassword(e.target.checked)}
+                    />
+                    <label htmlFor='show-password'>Mostrar Senha</label>
+                </div>
+
                 <div className="input-password">
                     <FaLock className='icon' />
-                    <input type='password' placeholder='Senha'
+                    <input 
+                    type={showPassword ? 'text' : 'password'} 
+                    placeholder='Senha'
                     onChange={(e) => setPassword(e.target.value)}
                     aria-describedby={passwordError ? 'password-error' : undefined}
                     />
@@ -108,16 +125,26 @@ const Register = () => {
                 <div className="input-password">
                     <FaLock className='icon' />
                     <input
-                    type='password'
+                    type={showPassword ? 'text' : 'password'}
                     placeholder='Repita a Senha'
                     onChange={(e) => setRePassword(e.target.value)} />
                 </div>
 
                 <div className="terms">
-                    <label>
-                        <input type='checkbox'></input>
-                        Aceito os <a href='#'>termos de uso</a>
-                    </label>
+                    <input 
+                    id='accept-terms'
+                    type='checkbox'
+                    checked={acceptTerms}
+                    onChange={(e) => setAcceptTerms(e.target.checked)}
+                    aria-describedby={termsError ? 'terms-error' : undefined}
+                    aria-invalid={termsError ? true : undefined}
+                    />
+                    <label htmlFor='accept-terms'>Aceito os <a href='#'>termos de uso</a></label>
+                {
+                    <p id='terms-error' className='error' role='alert' aria-live='assertive'>
+                        {termsError}
+                    </p>
+                }
                 </div>
 
                 <button

@@ -51,7 +51,8 @@
 
 .input-username .error,
 .input-email .error,
-.input-password .error {
+.input-password .error,
+.terms .error {
     grid-column: 1 / -1;
     grid-row: 2;
     margin-top: 6px;
@@ -62,6 +63,10 @@
     color: rgb(58, 58, 58);
 }
 
+input[type=password]:not(:placeholder-shown) {
+    font-size: 10px;
+}
+
 .container .recall-forget {
     display: flex;
     justify-content: space-between;
@@ -69,11 +74,13 @@
     margin: 15px 0px 10px;
 }
 
-.terms label {
+.terms label,
+.show-password label {
     color: white;
 }
 
-.terms input {
+.terms input,
+.show-password input {
     margin-right: 5px;
 }
 
