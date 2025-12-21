@@ -1,14 +1,14 @@
-export function validatePasswords(password, rePassword) {
-    const regex = /^(?=.*\d)(?=.*[a-z])(?=.*[A-Z])(?=.*[$*&@#])[0-9a-zA-Z$*&@#]{8,}$/;
+export function validateUsername(username) {
+    const regex = /^[\w\s-]+$/
 
-    if (!password && !rePassword) 
-        return {valid: false, error: ''}
+    if(!username)
+        return {valid: false , error: ''}
 
-    if (password !== rePassword) 
-        return {valid: false, error: 'As senhas não são iguais'}
+    if(username.length < 4)
+        return {valid: false, error: 'Username deve ter mais de 3 caracteres'}
 
-    if (!regex.test(password))
-        return {valid: false, error: 'A senha deve conter ao menos 8 caracteres com ao menos um caracter maíusculo, um minúsculo e um especial'}
+    if (!regex.test(username))
+        return {valid: false, error: 'O username deve conter apenas letras, números, espaços, - e _'}
 
     return {valid: true, error: ''}
 }
@@ -28,17 +28,17 @@ export function validateEmails(email, reEmail) {
     return {valid: true, error: ''}
 }
 
-export function validateUsername(username) {
-    const regex = /^[\w\s-]+$/
+export function validatePasswords(password, rePassword) {
+    const regex = /^(?=.*\d)(?=.*[a-z])(?=.*[A-Z])(?=.*[$*&@#])[0-9a-zA-Z$*&@#]{8,}$/;
 
-    if(!username)
-        return {valid: false , error: ''}
+    if (!password && !rePassword) 
+        return {valid: false, error: ''}
 
-    if(username.length < 4)
-        return {valid: false, error: 'Username deve ter mais de 3 caracteres'}
+    if (password !== rePassword) 
+        return {valid: false, error: 'As senhas não são iguais'}
 
-    if (!regex.test(username))
-        return {valid: false, error: 'O username deve conter apenas letras, números, espaços, - e _'}
+    if (!regex.test(password))
+        return {valid: false, error: 'A senha deve conter ao menos 8 caracteres com ao menos um caracter maíusculo, um minúsculo e um especial'}
 
     return {valid: true, error: ''}
 }
@@ -48,4 +48,21 @@ export function validateTerms(acceptTerms) {
         return { valid: false, error: 'Você precisa aceitar os termos para se registrar'}
 
     return { valid: true, error: '' }
+}
+
+export function validateRegisterForm({ username, email, reEmail, password, rePassword, acceptTerms }) {
+    const u = validateUsername(username)
+    const e = validateEmails(email, reEmail)
+    const p = validatePasswords(password, rePassword)
+    const t = validateTerms(acceptTerms)
+
+    return { 
+        valid: u.valid && e.valid && p.valid && t.valid,
+        errors: { 
+            username: u.error,
+            email: e.error,
+            password: p.error,
+            terms: t.error,
+        }
+    }
 }

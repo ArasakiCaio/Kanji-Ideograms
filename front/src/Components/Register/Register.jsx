@@ -3,7 +3,7 @@ import { FaLock, FaMailBulk, FaUser } from 'react-icons/fa';
 import { Link } from 'react-router-dom'
 
 import './Register.css'
-import { validateEmails, validatePasswords, validateTerms, validateUsername } from '../../utils/validators';
+import { validateEmails, validatePasswords, validateRegisterForm, validateTerms, validateUsername } from '../../utils/validators';
 
 const Register = () => {
     
@@ -36,17 +36,14 @@ const Register = () => {
         
         event.preventDefault();
 
-        const { valid: usernValid, error: usernError} = validateUsername(username)
-        const { valid: passValid, error: passError} = validatePasswords(password, rePassword)
-        const { valid: emailValid, error: emailError} = validateEmails(email, reEmail)
-        const { valid: termsValid, error: terError} = validateTerms(acceptTerms)
-        if(!usernValid || !passValid || !emailValid || !termsValid ) {
-            setUsernameError(usernError)
-            setPasswordError(passError)
-            setEmailError(emailError)
-            setTermsError(terError)
-            return
-        }
+        const { valid, errors } = validateRegisterForm({username, email, reEmail, password, rePassword, acceptTerms})
+
+        setUsernameError(errors.username)
+        setEmailError(errors.email)
+        setPasswordError(errors.password)
+        setTermsError(errors.terms)
+        if(!valid)
+            return;
     };
 
     return (
